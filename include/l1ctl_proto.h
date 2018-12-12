@@ -56,6 +56,7 @@ enum {
 	L1CTL_TRAFFIC_REQ,
 	L1CTL_TRAFFIC_CONF,
 	L1CTL_TRAFFIC_IND,
+<<<<<<< HEAD
 	L1CTL_BURST_IND,
 
 	/* configure TBF for uplink/downlink */
@@ -64,6 +65,12 @@ enum {
 
 	L1CTL_DATA_TBF_REQ,
 	L1CTL_DATA_TBF_CONF,
+=======
+	L1CTL_BTS_MODE,
+	L1CTL_BTS_BURST_REQ,
+	L1CTL_BTS_BURST_NB_IND,
+	L1CTL_BTS_BURST_AB_IND,
+>>>>>>> sylvain/testing
 };
 
 enum ccch_mode {
@@ -266,7 +273,10 @@ struct l1ctl_dm_est_req {
 	};
 	uint8_t tch_mode;
 	uint8_t audio_mode;
+	uint8_t dm_flags;
 } __attribute__((packed));
+
+#define L1CTL_DM_F_CBCH		(1 << 0)
 
 struct l1ctl_dm_freq_req {
 	uint16_t fn;
@@ -356,6 +366,35 @@ struct l1ctl_tbf_cfg_req {
 
 	/* one USF for each TN, or 255 for invalid/unused */
 	uint8_t usf[8];
+} __attribute__((packed));
+
+/* BTS mode: config */
+struct l1ctl_bts_mode {
+	uint8_t enabled;
+	uint8_t bsic;
+	uint16_t band_arfcn;
+} __attribute__((packed));
+
+/* BTS mode: Burst Request */
+struct l1ctl_bts_burst_req {
+	uint32_t fn;
+	uint8_t tn : 4;
+	uint8_t type : 4;
+	uint8_t data[0];	/* 15 for NB, 0 for others */
+} __attribute__((packed));
+
+/* BTS mode: NB Burst Indication */
+struct l1ctl_bts_burst_nb_ind {
+	uint32_t fn;
+	uint8_t tn;
+	uint8_t toa;
+	uint8_t data[15];
+} __attribute__((packed));
+
+/* BTS mode: AB Burst Indication */
+struct l1ctl_bts_burst_ab_ind {
+	uint32_t fn;
+	uint8_t iq[2*88];
 } __attribute__((packed));
 
 #endif /* __L1CTL_PROTO_H__ */

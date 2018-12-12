@@ -34,18 +34,18 @@ shared/libosmocore/build-target/src/.libs/libosmocore.a: shared/libosmocore/buil
 	cd shared/libosmocore/build-target && make
 
 
-.PHONY: osmocon
-osmocon: host/osmocon/osmocon
+HOST_APPS=osmocon gsmmap layer23
 
-host/osmocon/configure: host/osmocon/configure.ac
-	cd host/osmocon && autoreconf -i
+define HOST_APP_template
+.PHONY: $(1)
 
-host/osmocon/Makefile: host/osmocon/configure
-	cd host/osmocon && ./configure $(HOST_CONFARGS)
+host/$(1)/configure: host/$(1)/configure.ac
+	cd host/$(1) && autoreconf -i
 
-host/osmocon/osmocon: host/osmocon/Makefile
-	make -C host/osmocon
+host/$(1)/Makefile: host/$(1)/configure
+	cd host/$(1) && ./configure $(HOST_CONFARGS) $$(HOST_$(1)_CONFARGS)
 
+<<<<<<< HEAD
 .PHONY: virtphy
 virtphy: host/virt_phy/virtphy
 
@@ -70,31 +70,14 @@ host/trxcon/Makefile: host/trxcon/configure
 host/trxcon/trxcon: host/trxcon/Makefile
 	make -C host/trxcon
 
+=======
+$(1): host/$(1)/Makefile
+	make -C host/$(1)
+endef
+>>>>>>> sylvain/testing
 
-.PHONY: gsmmap
-gsmmap: host/gsmmap/gsmmap
-
-host/gsmmap/configure: host/gsmmap/configure.ac
-	cd host/gsmmap && autoreconf -i
-
-host/gsmmap/Makefile: host/gsmmap/configure
-	cd host/gsmmap && ./configure $(HOST_CONFARGS)
-
-host/gsmmap/gsmmap: host/gsmmap/Makefile
-	make -C host/gsmmap
-
-
-.PHONY: layer23
-layer23: host/layer23/layer23
-
-host/layer23/configure: host/layer23/configure.ac
-	cd host/layer23 && autoreconf -i
-
-host/layer23/Makefile: host/layer23/configure
-	cd host/layer23 && ./configure $(HOST_CONFARGS)
-
-host/layer23/layer23: host/layer23/Makefile
-	make -C host/layer23
+$(foreach app,$(HOST_APPS), \
+	$(eval $(call HOST_APP_template,$(app))))
 
 .PHONY: gprsdecode
 gprsdecode: host/gprsdecode/gprsdecode

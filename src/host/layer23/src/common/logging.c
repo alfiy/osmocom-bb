@@ -127,6 +127,7 @@ static const struct log_info_cat default_categories[] = {
 		.color = "\033[1;35m",
 		.enabled = 1, .loglevel = LOGL_DEBUG,
 	},
+<<<<<<< HEAD
 	[DMOB] = {
 		.name = "DMOB",
 		.description = "Mobile",
@@ -143,6 +144,18 @@ static const struct log_info_cat default_categories[] = {
 		.name = "DLUA",
 		.description = "LUA",
 		.color = "\033[1;32m",
+=======
+	[DTRX] = {
+		.name = "TRX",
+		.description = "TRX interface",
+		.color = "\033[1;36m",
+		.enabled = 1, .loglevel = LOGL_DEBUG,
+	},
+	[DAPP] = {
+		.name = "APP",
+		.description = "Application",
+		.color = "\033[1;35m",
+>>>>>>> sylvain/testing
 		.enabled = 1, .loglevel = LOGL_DEBUG,
 	},
 };

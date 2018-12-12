@@ -198,7 +198,10 @@ static const struct mframe_sched_item mf_sdcch8_7[] = {
 	{ .sched_set = NULL }
 };
 
+<<<<<<< HEAD
 /* CBCH replaces sub-slot 2 of SDCCH, see GSM 05.02, section 6.4 */
+=======
+>>>>>>> sylvain/testing
 static const struct mframe_sched_item mf_sdcch8_cbch[] = {
 	{ .sched_set = NB_QUAD_FH_DL, .modulo = 51, .frame_nr = 8 },
 	{ .sched_set = NULL }
@@ -311,6 +314,12 @@ static const struct mframe_sched_item mf_neigh_pm26_odd[] = {
 	{ .sched_set = NULL }
 };
 
+/* BTS */
+static const struct mframe_sched_item mf_bts[] = {
+	{ .sched_set = bts_sched_set, .modulo = 1, .frame_nr =  0 },
+	{ .sched_set = NULL }
+};
+
 /* Test TX */
 static const struct mframe_sched_item mf_tx_all_nb[] = {
 	{ .sched_set = NB_QUAD_FH_UL, .modulo = 4, .frame_nr = 0 },
@@ -350,6 +359,8 @@ static const struct mframe_sched_item *sched_set_for_task[32] = {
 	[MF_TASK_NEIGH_PM26E] = mf_neigh_pm26_even,
 	[MF_TASK_NEIGH_PM26O] = mf_neigh_pm26_odd,
 
+	[MF_TASK_BTS] = mf_bts,
+
 	[MF_TASK_UL_ALL_NB] = mf_tx_all_nb,
 };
 
@@ -374,6 +385,7 @@ uint8_t mframe_task2chan_nr(enum mframe_task mft, uint8_t ts)
 		cbits = 0x04 + 1;
 		break;
 	case MF_TASK_SDCCH4_2:
+	case MF_TASK_SDCCH4_CBCH:
 		cbits = 0x04 + 2;
 		break;
 	case MF_TASK_SDCCH4_3:
@@ -386,6 +398,7 @@ uint8_t mframe_task2chan_nr(enum mframe_task mft, uint8_t ts)
 		cbits = 0x08 + 1;
 		break;
 	case MF_TASK_SDCCH8_2:
+	case MF_TASK_SDCCH8_CBCH:
 		cbits = 0x08 + 2;
 		break;
 	case MF_TASK_SDCCH8_3:
