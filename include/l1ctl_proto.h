@@ -56,7 +56,6 @@ enum {
 	L1CTL_TRAFFIC_REQ,
 	L1CTL_TRAFFIC_CONF,
 	L1CTL_TRAFFIC_IND,
-<<<<<<< HEAD
 	L1CTL_BURST_IND,
 
 	/* configure TBF for uplink/downlink */
@@ -65,12 +64,10 @@ enum {
 
 	L1CTL_DATA_TBF_REQ,
 	L1CTL_DATA_TBF_CONF,
-=======
 	L1CTL_BTS_MODE,
 	L1CTL_BTS_BURST_REQ,
 	L1CTL_BTS_BURST_NB_IND,
 	L1CTL_BTS_BURST_AB_IND,
->>>>>>> sylvain/testing
 };
 
 enum ccch_mode {

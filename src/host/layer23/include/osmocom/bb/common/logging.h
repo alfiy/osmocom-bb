@@ -22,14 +22,11 @@ enum {
 	DSUM,
 	DSIM,
 	DGPS,
-<<<<<<< HEAD
 	DMOB,
 	DPRIM,
 	DLUA,
-=======
 	DTRX,
 	DAPP,
->>>>>>> sylvain/testing
 };
 
 extern const struct log_info log_info;

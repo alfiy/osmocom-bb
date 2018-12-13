@@ -45,7 +45,10 @@ host/$(1)/configure: host/$(1)/configure.ac
 host/$(1)/Makefile: host/$(1)/configure
 	cd host/$(1) && ./configure $(HOST_CONFARGS) $$(HOST_$(1)_CONFARGS)
 
-<<<<<<< HEAD
+$(1): host/$(1)/Makefile
+	make -C host/$(1)
+endef
+
 .PHONY: virtphy
 virtphy: host/virt_phy/virtphy
 
@@ -70,11 +73,6 @@ host/trxcon/Makefile: host/trxcon/configure
 host/trxcon/trxcon: host/trxcon/Makefile
 	make -C host/trxcon
 
-=======
-$(1): host/$(1)/Makefile
-	make -C host/$(1)
-endef
->>>>>>> sylvain/testing
 
 $(foreach app,$(HOST_APPS), \
 	$(eval $(call HOST_APP_template,$(app))))

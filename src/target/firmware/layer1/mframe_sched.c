@@ -197,11 +197,7 @@ static const struct mframe_sched_item mf_sdcch8_7[] = {
 	  .flags = MF_F_SACCH },
 	{ .sched_set = NULL }
 };
-
-<<<<<<< HEAD
 /* CBCH replaces sub-slot 2 of SDCCH, see GSM 05.02, section 6.4 */
-=======
->>>>>>> sylvain/testing
 static const struct mframe_sched_item mf_sdcch8_cbch[] = {
 	{ .sched_set = NB_QUAD_FH_DL, .modulo = 51, .frame_nr = 8 },
 	{ .sched_set = NULL }
@@ -385,7 +381,6 @@ uint8_t mframe_task2chan_nr(enum mframe_task mft, uint8_t ts)
 		cbits = 0x04 + 1;
 		break;
 	case MF_TASK_SDCCH4_2:
-	case MF_TASK_SDCCH4_CBCH:
 		cbits = 0x04 + 2;
 		break;
 	case MF_TASK_SDCCH4_3:
@@ -398,7 +393,6 @@ uint8_t mframe_task2chan_nr(enum mframe_task mft, uint8_t ts)
 		cbits = 0x08 + 1;
 		break;
 	case MF_TASK_SDCCH8_2:
-	case MF_TASK_SDCCH8_CBCH:
 		cbits = 0x08 + 2;
 		break;
 	case MF_TASK_SDCCH8_3:
